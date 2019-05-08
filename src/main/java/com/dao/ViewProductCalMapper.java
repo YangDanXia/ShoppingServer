@@ -6,4 +6,6 @@ public interface ViewProductCalMapper {
     int insert(ViewProductCal record);
 
     int insertSelective(ViewProductCal record);
+
+    ViewProductCal selectByPrimaryKey(String pId);
 }

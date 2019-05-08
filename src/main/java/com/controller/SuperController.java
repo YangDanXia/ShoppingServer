@@ -47,7 +47,6 @@ public abstract class SuperController {
         JSONObject json = new JSONObject();
         if(isExist == null) {
             json.put("res", 0);
-            json.put("error", "該手機號不存在");
         }else{
             json.put("res",1);
             toJson(json,isExist);

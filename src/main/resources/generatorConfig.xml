@@ -47,7 +47,7 @@
         <!--列出要生成代码的所有数据表,设置不生成Example文件 -->
         <!--table标签可通过设置domainObjectName属性指定生成对象的基本名称。如果没有指定，MBG会自动根据表名来生成名称-->
 
-        <table tableName="bill_sum" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        <table tableName="view_product_cal" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false" >
             <!-- 实体类中的成员变量和表的列名一一对应 -->
             <property name="useActualColumnNames" value="true"/>

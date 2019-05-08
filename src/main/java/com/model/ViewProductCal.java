@@ -15,21 +15,30 @@ public class ViewProductCal implements Serializable {
 
     private String pYear;
 
+    private String unit_priceCode;
+
     private Integer actual_price;
 
     private Integer profit_price;
 
+    private Integer sale_totalQty;
+
+    private Integer rest_qty;
+
     private static final long serialVersionUID = 1L;
 
-    public ViewProductCal(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, Integer actual_price, Integer profit_price) {
+    public ViewProductCal(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String unit_priceCode, Integer actual_price, Integer profit_price, Integer sale_totalQty, Integer rest_qty) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
         this.pBrand = pBrand;
         this.pSupplier = pSupplier;
         this.pYear = pYear;
+        this.unit_priceCode = unit_priceCode;
         this.actual_price = actual_price;
         this.profit_price = profit_price;
+        this.sale_totalQty = sale_totalQty;
+        this.rest_qty = rest_qty;
     }
 
     public ViewProductCal() {
@@ -84,6 +93,14 @@ public class ViewProductCal implements Serializable {
         this.pYear = pYear;
     }
 
+    public String getUnit_priceCode() {
+        return unit_priceCode;
+    }
+
+    public void setUnit_priceCode(String unit_priceCode) {
+        this.unit_priceCode = unit_priceCode;
+    }
+
     public Integer getActual_price() {
         return actual_price;
     }
@@ -98,5 +115,21 @@ public class ViewProductCal implements Serializable {
 
     public void setProfit_price(Integer profit_price) {
         this.profit_price = profit_price;
+    }
+
+    public Integer getSale_totalQty() {
+        return sale_totalQty;
+    }
+
+    public void setSale_totalQty(Integer sale_totalQty) {
+        this.sale_totalQty = sale_totalQty;
+    }
+
+    public Integer getRest_qty() {
+        return rest_qty;
+    }
+
+    public void setRest_qty(Integer rest_qty) {
+        this.rest_qty = rest_qty;
     }
 }
