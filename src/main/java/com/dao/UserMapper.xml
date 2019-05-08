@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.model.User" >
+    <constructor >
+      <arg column="uTel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uPasswd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="credit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uTel, uPasswd, uName, credit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uTel = #{uTel,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultType="com.model.User" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where uTel = #{uTel,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.model.User" >
+    insert into user ( uTel, uPasswd,
+      uName, credit)
+    values (#{uTel,jdbcType=VARCHAR}, #{uPasswd,jdbcType=VARCHAR},
+      #{uName,jdbcType=VARCHAR}, #{credit,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uTel != null" >
+        uTel,
+      </if>
+      <if test="uPasswd != null" >
+        uPasswd,
+      </if>
+      <if test="uName != null" >
+        uName,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uTel != null" >
+        #{uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uPasswd != null" >
+        #{uPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updatePasswd" parameterType="com.model.User" >
+    update user
+    set uPasswd = #{uPasswd,jdbcType=VARCHAR}
+    where uTel = #{uTel,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateCredit">
+    update user
+    set credit = #{1}
+    where uTel = #{0}
+  </update>
+
+</mapper>

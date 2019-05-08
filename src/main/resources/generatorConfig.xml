@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+
+    <!--引入外部配置文件-->
+    <properties resource="jdbc.properties"/>
+    <!--指定jdbc驱动路径-->
+    <classPathEntry location="E:\maven\repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar"/>
+
+    <context id="context1" targetRuntime="mybatis3">
+        <!--序列化pojo-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!--是否去处自动生成的注释-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接-->
+        <jdbcConnection driverClass="${jdbc.driver}" connectionURL="${jdbc.url}"
+        userId="${jdbc.username}" password="${jdbc.password}"/>
+
+        <!--生成model模型-->
+        <!--targetPackage:指定生成的model的包名-->
+        <!--targetProject:指定该包在该项目下的路径-->
+        <javaModelGenerator targetPackage="com.model" targetProject="src/main/java">
+            <!--是否在类中添加构造函数，若immutable属性被设置为true则失效-->
+            <property name="constructorBased" value="true"/>
+            <!--是否允许有子包-->
+            <property name="enableSubPackages" value="true"/>
+            <!--生成的Model对象没有setter方法，默认值是false-->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <!--生成mapper.xml文件的地址,为每一个数据表生成对于的映射文件（SQL语言实现）-->
+        <sqlMapGenerator targetPackage="com.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--对应的Mapper接口(增删改查方法接口)-->
+        <javaClientGenerator targetPackage="com.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--列出要生成代码的所有数据表,设置不生成Example文件 -->
+        <!--table标签可通过设置domainObjectName属性指定生成对象的基本名称。如果没有指定，MBG会自动根据表名来生成名称-->
+
+        <table tableName="bill_sum" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <!-- 实体类中的成员变量和表的列名一一对应 -->
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+
+    </context>
+
+</generatorConfiguration>

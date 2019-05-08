@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ViewProductCalMapper" >
+  <resultMap id="BaseResultMap" type="com.model.ViewProductCal" >
+    <constructor >
+      <arg column="pId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pBrand" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pYear" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="profit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.model.ViewProductCal" >
+    insert into view_product_cal (pId, pName, pType, 
+      pBrand, pSupplier, pYear, 
+      actual_price, profit_price)
+    values (#{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR}, 
+      #{pBrand,jdbcType=VARCHAR}, #{pSupplier,jdbcType=VARCHAR}, #{pYear,jdbcType=VARCHAR}, 
+      #{actual_price,jdbcType=INTEGER}, #{profit_price,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.ViewProductCal" >
+    insert into view_product_cal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        pId,
+      </if>
+      <if test="pName != null" >
+        pName,
+      </if>
+      <if test="pType != null" >
+        pType,
+      </if>
+      <if test="pBrand != null" >
+        pBrand,
+      </if>
+      <if test="pSupplier != null" >
+        pSupplier,
+      </if>
+      <if test="pYear != null" >
+        pYear,
+      </if>
+      <if test="actual_price != null" >
+        actual_price,
+      </if>
+      <if test="profit_price != null" >
+        profit_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pBrand != null" >
+        #{pBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pSupplier != null" >
+        #{pSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pYear != null" >
+        #{pYear,jdbcType=VARCHAR},
+      </if>
+      <if test="actual_price != null" >
+        #{actual_price,jdbcType=INTEGER},
+      </if>
+      <if test="profit_price != null" >
+        #{profit_price,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

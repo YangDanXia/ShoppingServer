@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.model.ProductInfo" >
+    <constructor >
+      <idArg column="pId" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pType" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pBrand" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pYear" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pImage" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pFrom" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="pFromName" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pId, pName, pType, pBrand, pSupplier, pYear, pImage, pFrom, pFromName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_info
+    where pId = #{pId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from product_info
+    where pId = #{pId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.model.ProductInfo" >
+    insert into product_info (pId, pName, pType, 
+      pBrand, pSupplier, pYear, 
+      pImage, pFrom, pFromName
+      )
+    values (#{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR}, 
+      #{pBrand,jdbcType=VARCHAR}, #{pSupplier,jdbcType=VARCHAR}, #{pYear,jdbcType=VARCHAR}, 
+      #{pImage,jdbcType=VARCHAR}, #{pFrom,jdbcType=BIT}, #{pFromName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.ProductInfo" >
+    insert into product_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        pId,
+      </if>
+      <if test="pName != null" >
+        pName,
+      </if>
+      <if test="pType != null" >
+        pType,
+      </if>
+      <if test="pBrand != null" >
+        pBrand,
+      </if>
+      <if test="pSupplier != null" >
+        pSupplier,
+      </if>
+      <if test="pYear != null" >
+        pYear,
+      </if>
+      <if test="pImage != null" >
+        pImage,
+      </if>
+      <if test="pFrom != null" >
+        pFrom,
+      </if>
+      <if test="pFromName != null" >
+        pFromName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pBrand != null" >
+        #{pBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pSupplier != null" >
+        #{pSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pYear != null" >
+        #{pYear,jdbcType=VARCHAR},
+      </if>
+      <if test="pImage != null" >
+        #{pImage,jdbcType=VARCHAR},
+      </if>
+      <if test="pFrom != null" >
+        #{pFrom,jdbcType=BIT},
+      </if>
+      <if test="pFromName != null" >
+        #{pFromName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.ProductInfo" >
+    update product_info
+    <set >
+      <if test="pName != null" >
+        pName = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        pType = #{pType,jdbcType=VARCHAR},
+      </if>
+      <if test="pBrand != null" >
+        pBrand = #{pBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="pSupplier != null" >
+        pSupplier = #{pSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="pYear != null" >
+        pYear = #{pYear,jdbcType=VARCHAR},
+      </if>
+      <if test="pImage != null" >
+        pImage = #{pImage,jdbcType=VARCHAR},
+      </if>
+      <if test="pFrom != null" >
+        pFrom = #{pFrom,jdbcType=BIT},
+      </if>
+      <if test="pFromName != null" >
+        pFromName = #{pFromName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pId = #{pId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.ProductInfo" >
+    update product_info
+    set pName = #{pName,jdbcType=VARCHAR},
+      pType = #{pType,jdbcType=VARCHAR},
+      pBrand = #{pBrand,jdbcType=VARCHAR},
+      pSupplier = #{pSupplier,jdbcType=VARCHAR},
+      pYear = #{pYear,jdbcType=VARCHAR},
+      pImage = #{pImage,jdbcType=VARCHAR},
+      pFrom = #{pFrom,jdbcType=BIT},
+      pFromName = #{pFromName,jdbcType=VARCHAR}
+    where pId = #{pId,jdbcType=VARCHAR}
+  </update>
+</mapper>

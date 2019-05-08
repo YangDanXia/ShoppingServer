@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.model.Member" >
+    <constructor >
+      <arg column="mTel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mPasswd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="mName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="privilege" jdbcType="BIT" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+   mTel, mPasswd, mName, privilege
+  </sql>
+
+  <select id="selectByTel" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where mTel = #{mTel,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectAll" resultType="com.model.Member" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from member
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from member
+    where mTel = #{mTel,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.model.Member" keyProperty="mTel">
+    insert into member (mTel, mPasswd,
+      mName, privilege)
+    values (#{mTel,jdbcType=VARCHAR}, #{mPasswd,jdbcType=VARCHAR},
+      #{mName,jdbcType=VARCHAR}, #{privilege,jdbcType=BIT})
+  </insert>
+
+
+  <update id="updatePasswd" parameterType="java.lang.String" >
+    update member
+    set mPasswd = #{mPasswd,jdbcType=VARCHAR}
+    where mTel = #{mTel,jdbcType=VARCHAR}
+  </update>
+</mapper>
