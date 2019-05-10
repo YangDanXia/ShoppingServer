@@ -17,13 +17,13 @@ public class ProductInfo implements Serializable {
 
     private String pImage;
 
-    private Boolean pFrom;
+    private Integer pFrom;
 
     private String pFromName;
 
     private static final long serialVersionUID = 1L;
 
-    public ProductInfo(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pImage, Boolean pFrom, String pFromName) {
+    public ProductInfo(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pImage, Integer pFrom, String pFromName) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
@@ -95,11 +95,11 @@ public class ProductInfo implements Serializable {
         this.pImage = pImage;
     }
 
-    public Boolean getpFrom() {
+    public Integer getpFrom() {
         return pFrom;
     }
 
-    public void setpFrom(Boolean pFrom) {
+    public void setpFrom(Integer pFrom) {
         this.pFrom = pFrom;
     }
 
@@ -109,5 +109,89 @@ public class ProductInfo implements Serializable {
 
     public void setpFromName(String pFromName) {
         this.pFromName = pFromName;
+    }
+
+
+//    商品价格表
+    private String unit_priceCode;
+
+    private Integer unit_price;
+
+    private Integer recommend_prcie;
+
+    private Integer discout;
+
+    private Integer actual_price;
+
+    private Integer profit_price;
+
+    public String getUnit_priceCode() {
+        return unit_priceCode;
+    }
+
+    public void setUnit_priceCode(String unit_priceCode) {
+        this.unit_priceCode = unit_priceCode;
+    }
+
+    public Integer getUnit_price() {
+        return unit_price;
+    }
+
+    public void setUnit_price(Integer unit_price) {
+        this.unit_price = unit_price;
+    }
+
+    public Integer getRecommend_prcie() {
+        return recommend_prcie;
+    }
+
+    public void setRecommend_prcie(Integer recommend_prcie) {
+        this.recommend_prcie = recommend_prcie;
+    }
+
+    public Integer getDiscout() {
+        return discout;
+    }
+
+    public void setDiscout(Integer discout) {
+        this.discout = discout;
+    }
+
+    public Integer getActual_price() {
+        return actual_price;
+    }
+
+    public void setActual_price(Integer actual_price) {
+        this.actual_price = actual_price;
+    }
+
+    public Integer getProfit_price() {
+        return profit_price;
+    }
+
+    public void setProfit_price(Integer profit_price) {
+        this.profit_price = profit_price;
+    }
+
+
+//    商品库存表
+    private Integer sale_totalQty;
+
+    private Integer rest_qty;
+
+    public Integer getSale_totalQty() {
+        return sale_totalQty;
+    }
+
+    public void setSale_totalQty(Integer sale_totalQty) {
+        this.sale_totalQty = sale_totalQty;
+    }
+
+    public Integer getRest_qty() {
+        return rest_qty;
+    }
+
+    public void setRest_qty(Integer rest_qty) {
+        this.rest_qty = rest_qty;
     }
 }

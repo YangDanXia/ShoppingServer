@@ -2,10 +2,13 @@ package com.dao;
 
 import com.model.ViewProductCal;
 
-public interface ViewProductCalMapper {
-    int insert(ViewProductCal record);
+import java.util.List;
 
-    int insertSelective(ViewProductCal record);
+public interface ViewProductCalMapper {
 
     ViewProductCal selectByPrimaryKey(String pId);
+
+    List<ViewProductCal> selectAll();
+
+    List<ViewProductCal> selectAllByFrom(int from);
 }

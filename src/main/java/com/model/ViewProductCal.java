@@ -11,6 +11,8 @@ public class ViewProductCal implements Serializable {
 
     private String pBrand;
 
+    private Integer pFrom;
+
     private String pSupplier;
 
     private String pYear;
@@ -27,11 +29,12 @@ public class ViewProductCal implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public ViewProductCal(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String unit_priceCode, Integer actual_price, Integer profit_price, Integer sale_totalQty, Integer rest_qty) {
+    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, String unit_priceCode, Integer actual_price, Integer profit_price, Integer sale_totalQty, Integer rest_qty) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
         this.pBrand = pBrand;
+        this.pFrom = pFrom;
         this.pSupplier = pSupplier;
         this.pYear = pYear;
         this.unit_priceCode = unit_priceCode;
@@ -67,6 +70,14 @@ public class ViewProductCal implements Serializable {
 
     public void setpType(String pType) {
         this.pType = pType;
+    }
+
+    public Integer getpFrom() {
+        return pFrom;
+    }
+
+    public void setpFrom(Integer pFrom) {
+        this.pFrom = pFrom;
     }
 
     public String getpBrand() {

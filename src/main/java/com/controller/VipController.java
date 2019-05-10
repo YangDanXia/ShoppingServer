@@ -67,7 +67,7 @@ public class VipController extends SuperController {
     @ApiOperation(value = "更新指定會員積分")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tel", value = "手机号", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "credit", value = "積分", dataType = "Integer", paramType = "query")
+            @ApiImplicitParam(name = "credit", value = "積分", dataType = "int", paramType = "query")
     })
     @Override
     public void rewrite(HttpServletRequest request, HttpServletResponse response) throws IOException {

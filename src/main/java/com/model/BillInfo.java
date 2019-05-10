@@ -66,4 +66,25 @@ public class BillInfo implements Serializable {
     public void setTotal_profit(Integer total_profit) {
         this.total_profit = total_profit;
     }
+
+
+    private Integer sale_totalQty;
+
+    private Integer rest_qty;
+
+    public Integer getSale_totalQty() {
+        return sale_totalQty;
+    }
+
+    public void setSale_totalQty(Integer sale_totalQty) {
+        this.sale_totalQty = sale_totalQty;
+    }
+
+    public Integer getRest_qty() {
+        return rest_qty;
+    }
+
+    public void setRest_qty(Integer rest_qty) {
+        this.rest_qty = rest_qty;
+    }
 }

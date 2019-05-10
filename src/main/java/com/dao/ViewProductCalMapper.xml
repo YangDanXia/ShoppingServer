@@ -7,6 +7,7 @@
       <arg column="pName" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pType" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pBrand" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pFrom" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="pSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pYear" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="unit_priceCode" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -18,7 +19,7 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
-    pId, pName, pType, pBrand, pSupplier, pYear, unit_priceCode, actual_price, profit_price, sale_totalQty, rest_qty
+    pId, pName, pType, pBrand, pFrom,pSupplier, pYear, unit_priceCode, actual_price, profit_price, sale_totalQty, rest_qty
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -29,88 +30,18 @@
   </select>
 
 
+  <select id="selectAll" resultType="com.model.ViewProductCal" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from view_product_cal
+  </select>
 
-  <insert id="insert" parameterType="com.model.ViewProductCal" >
-    insert into view_product_cal (pId, pName, pType, 
-      pBrand, pSupplier, pYear, 
-      unit_priceCode, actual_price, profit_price, 
-      sale_totalQty, rest_qty)
-    values (#{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR}, 
-      #{pBrand,jdbcType=VARCHAR}, #{pSupplier,jdbcType=VARCHAR}, #{pYear,jdbcType=VARCHAR}, 
-      #{unit_priceCode,jdbcType=VARCHAR}, #{actual_price,jdbcType=INTEGER}, #{profit_price,jdbcType=INTEGER}, 
-      #{sale_totalQty,jdbcType=INTEGER}, #{rest_qty,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.model.ViewProductCal" >
-    insert into view_product_cal
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="pId != null" >
-        pId,
-      </if>
-      <if test="pName != null" >
-        pName,
-      </if>
-      <if test="pType != null" >
-        pType,
-      </if>
-      <if test="pBrand != null" >
-        pBrand,
-      </if>
-      <if test="pSupplier != null" >
-        pSupplier,
-      </if>
-      <if test="pYear != null" >
-        pYear,
-      </if>
-      <if test="unit_priceCode != null" >
-        unit_priceCode,
-      </if>
-      <if test="actual_price != null" >
-        actual_price,
-      </if>
-      <if test="profit_price != null" >
-        profit_price,
-      </if>
-      <if test="sale_totalQty != null" >
-        sale_totalQty,
-      </if>
-      <if test="rest_qty != null" >
-        rest_qty,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="pId != null" >
-        #{pId,jdbcType=VARCHAR},
-      </if>
-      <if test="pName != null" >
-        #{pName,jdbcType=VARCHAR},
-      </if>
-      <if test="pType != null" >
-        #{pType,jdbcType=VARCHAR},
-      </if>
-      <if test="pBrand != null" >
-        #{pBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="pSupplier != null" >
-        #{pSupplier,jdbcType=VARCHAR},
-      </if>
-      <if test="pYear != null" >
-        #{pYear,jdbcType=VARCHAR},
-      </if>
-      <if test="unit_priceCode != null" >
-        #{unit_priceCode,jdbcType=VARCHAR},
-      </if>
-      <if test="actual_price != null" >
-        #{actual_price,jdbcType=INTEGER},
-      </if>
-      <if test="profit_price != null" >
-        #{profit_price,jdbcType=INTEGER},
-      </if>
-      <if test="sale_totalQty != null" >
-        #{sale_totalQty,jdbcType=INTEGER},
-      </if>
-      <if test="rest_qty != null" >
-        #{rest_qty,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+  <select id="selectAllByFrom" resultType="com.model.ViewProductCal" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from view_product_cal
+    where pFrom = #{pFrom,jdbcType=INTEGER}
+  </select>
+
+
 </mapper>

@@ -1,8 +1,10 @@
 package com.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.model.BillInfo;
 import com.model.BillSum;
 import com.service.BillService;
+import com.service.ProductInBill;
 import com.utils.CtxUtil;
 import io.swagger.annotations.*;
 import org.springframework.stereotype.Controller;
@@ -15,12 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @ResponseBody
-@Api(tags = "賬單管理接口",description = "賬單管理相關操作说明")
+@Api(tags = "账单管理接口",description = "账单管理相关操作说明")
 public class BillController extends SuperController {
     public BillService billService = CtxUtil.getBean(BillService .class);
+    public ProductInBill productInBill = CtxUtil.getBean(ProductInBill.class);
 
 
     @RequestMapping(value="/addBill", method= RequestMethod.POST)
@@ -30,7 +34,7 @@ public class BillController extends SuperController {
     @Override
     public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //   獲取時間
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         String date = df.format(new Date());
         String bId = request.getParameter("bId");
         BillSum insertInfo = new BillSum(bId,0,0,0,date);
@@ -43,11 +47,27 @@ public class BillController extends SuperController {
     @ApiOperation(value = "添加賬單的商品內容")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "bId",value="賬單編號",dataType="String",paramType = "query"),
-            @ApiImplicitParam(name = "pId",value="商品編號",dataType="String",paramType = "query")
+            @ApiImplicitParam(name = "pId",value="商品編號",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "saleQty",value="售出数量",dataType="int",paramType = "query"),
+            @ApiImplicitParam(name = "totalPrice",value="总收入",dataType="int",paramType = "query"),
+            @ApiImplicitParam(name = "totalProfit",value="总利润",dataType="int",paramType = "query"),
+            @ApiImplicitParam(name = "saleTotalQty",value="售出总数量",dataType="int",paramType = "query"),
+            @ApiImplicitParam(name = "restQty",value="商品库存",dataType="int",paramType = "query")
     })
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
-    public void addBillInfo(){
-
+    public void addBillInfo(HttpServletRequest request,HttpServletResponse response) throws IOException{
+        String bId = request.getParameter("bId");
+        String pId = request.getParameter("pId");
+        Integer saleQty = Integer.parseInt(request.getParameter("saleQty"));
+        Integer totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+        Integer totalProfit = Integer.parseInt(request.getParameter("totalProfit"));
+        Integer saleTotalQty = Integer.parseInt(request.getParameter("saleTotalQty"));
+        Integer restQty = Integer.parseInt(request.getParameter("restQty"));
+        BillInfo insertInfo = new BillInfo(bId,pId,saleQty,totalPrice,totalProfit);
+        insertInfo.setSale_totalQty(saleTotalQty);
+        insertInfo.setRest_qty(restQty);
+        BillInfo isExist = productInBill.isExist(bId,pId);
+        insert(response,isExist,insertInfo,productInBill);
     }
 
 
@@ -70,7 +90,8 @@ public class BillController extends SuperController {
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
     @Override
     public void showList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+        List<BillSum> allInfo = billService.selectAll();
+        select(response,allInfo);
     }
 
 
@@ -91,6 +112,11 @@ public class BillController extends SuperController {
 
     @Override
     public void toJson(JSONObject obj, Object item) {
-
+        BillSum bill = (BillSum) item;
+        obj.put("bId", bill.getbId());
+        obj.put("price",bill.getBill_price());
+        obj.put("profit",bill.getBill_profit());
+        obj.put("Qty",bill.getProduct_qty());
+        obj.put("time",bill.getCreate_time());
     }
 }

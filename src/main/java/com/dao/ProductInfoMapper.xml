@@ -10,7 +10,7 @@
       <arg column="pSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pYear" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pImage" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pFrom" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="pFrom" jdbcType="BIT" javaType="java.lang.Integer" />
       <arg column="pFromName" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
@@ -27,6 +27,7 @@
     delete from product_info
     where pId = #{pId,jdbcType=VARCHAR}
   </delete>
+
   <insert id="insert" parameterType="com.model.ProductInfo" >
     insert into product_info (pId, pName, pType, 
       pBrand, pSupplier, pYear, 
@@ -37,6 +38,7 @@
       #{pImage,jdbcType=VARCHAR}, #{pFrom,jdbcType=BIT}, #{pFromName,jdbcType=VARCHAR}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.model.ProductInfo" >
     insert into product_info
     <trim prefix="(" suffix=")" suffixOverrides="," >

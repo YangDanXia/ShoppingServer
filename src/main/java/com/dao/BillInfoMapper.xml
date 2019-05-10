@@ -10,6 +10,18 @@
       <arg column="total_profit" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
+  <sql id="Base_Column_List" >
+    bId,pId, sale_qty,total_price,total_profit
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bill_info
+    where bId = #{0} AND pId = #{1}
+  </select>
+
   <insert id="insert" parameterType="com.model.BillInfo" >
     insert into bill_info (bId, pId, sale_qty, 
       total_price, total_profit)

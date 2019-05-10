@@ -64,6 +64,7 @@
     </set>
     where pId = #{pId,jdbcType=VARCHAR}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.model.ProductStorage" >
     update product_storage
     set sale_totalQty = #{sale_totalQty,jdbcType=INTEGER},

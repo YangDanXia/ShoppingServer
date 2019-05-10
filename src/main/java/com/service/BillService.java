@@ -1,6 +1,8 @@
 package com.service;
 
+import com.dao.BillInfoMapper;
 import com.dao.BillSumMapper;
+import com.model.BillInfo;
 import com.model.BillSum;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -30,4 +32,6 @@ public class BillService extends SuperService{
     public int update(BillSum bill){
         return billSumMapper.updateByPrimaryKey(bill);
     }
+
+
 }
