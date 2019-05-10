@@ -2,8 +2,8 @@ package com.dao;
 
 import com.model.ViewBillDay;
 
-public interface ViewBillDayMapper {
-    int insert(ViewBillDay record);
+import java.util.List;
 
-    int insertSelective(ViewBillDay record);
+public interface ViewBillDayMapper {
+    List<ViewBillDay> selectByPrimaryKey(String bId);
 }

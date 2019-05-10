@@ -36,7 +36,7 @@
     from view_product_cal
   </select>
 
-  <select id="selectAllByFrom" resultType="com.model.ViewProductCal" parameterType="java.lang.String" >
+  <select id="selectAllByFrom" resultType="com.model.ViewProductCal" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from view_product_cal

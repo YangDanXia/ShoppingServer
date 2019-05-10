@@ -2,17 +2,27 @@ package com.service;
 
 import com.dao.BillInfoMapper;
 import com.dao.ProductStorageMapper;
+import com.dao.ViewBillDayMapper;
+import com.dao.ViewSaleMapper;
 import com.model.BillInfo;
 import com.model.ProductStorage;
+import com.model.ViewBillDay;
+import com.model.ViewSale;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-public class ProductInBill extends SuperService {
+@Service("ProductInBillService")
+public class ProductInBillService extends SuperService {
     @Resource
     BillInfoMapper billInfoMapper;
     @Resource
     ProductStorageMapper productStorageMapper;
+    @Resource
+    ViewSaleMapper viewSaleMapper;
+    @Resource
+    ViewBillDayMapper viewBillDayMapper;
 
     @Override
     public int add(Object record) {
@@ -33,8 +43,8 @@ public class ProductInBill extends SuperService {
     }
 
     @Override
-    public Object select(String id) {
-        return null;
+    public List<ViewBillDay> select(String id) {
+        return viewBillDayMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -45,5 +55,14 @@ public class ProductInBill extends SuperService {
     //    商品是否存在
     public BillInfo isExist(String bId, String pId){
         return billInfoMapper.selectByPrimaryKey(bId,pId);
+    }
+
+//    查看商品销售情况
+    public List<ViewSale> selectBrandSale(){
+        return viewSaleMapper.selectAllBrand();
+    }
+
+    public List<ViewSale> selectTypeSale(){
+        return viewSaleMapper.selectAllType();
     }
 }

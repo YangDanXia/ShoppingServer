@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ViewSaleMapper" >
+  <resultMap id="BaseResultMap" type="com.model.ViewSale" >
+    <constructor >
+      <arg column="kindName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="productQty" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="profit" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="saleQty" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+    </constructor>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    kindName, productQty, profit, saleQty
+  </sql>
+
+  <select id="selectAllBrand" resultType="com.model.ViewSale" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from view_brand_sale
+  </select>
+
+  <select id="selectAllType" resultType="com.model.ViewSale" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from view_type_sale
+  </select>
+</mapper>

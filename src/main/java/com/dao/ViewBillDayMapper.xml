@@ -18,101 +18,17 @@
       <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="com.model.ViewBillDay" >
-    insert into view_bill_day (bId, sale_qty, total_price, 
-      total_profit, pId, pName, 
-      pType, pBrand, pSupplier, 
-      pYear, pFromName, unit_priceCode, 
-      actual_price)
-    values (#{bId,jdbcType=VARCHAR}, #{sale_qty,jdbcType=INTEGER}, #{total_price,jdbcType=INTEGER}, 
-      #{total_profit,jdbcType=INTEGER}, #{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, 
-      #{pType,jdbcType=VARCHAR}, #{pBrand,jdbcType=VARCHAR}, #{pSupplier,jdbcType=VARCHAR}, 
-      #{pYear,jdbcType=VARCHAR}, #{pFromName,jdbcType=VARCHAR}, #{unit_priceCode,jdbcType=VARCHAR}, 
-      #{actual_price,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.model.ViewBillDay" >
-    insert into view_bill_day
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="bId != null" >
-        bId,
-      </if>
-      <if test="sale_qty != null" >
-        sale_qty,
-      </if>
-      <if test="total_price != null" >
-        total_price,
-      </if>
-      <if test="total_profit != null" >
-        total_profit,
-      </if>
-      <if test="pId != null" >
-        pId,
-      </if>
-      <if test="pName != null" >
-        pName,
-      </if>
-      <if test="pType != null" >
-        pType,
-      </if>
-      <if test="pBrand != null" >
-        pBrand,
-      </if>
-      <if test="pSupplier != null" >
-        pSupplier,
-      </if>
-      <if test="pYear != null" >
-        pYear,
-      </if>
-      <if test="pFromName != null" >
-        pFromName,
-      </if>
-      <if test="unit_priceCode != null" >
-        unit_priceCode,
-      </if>
-      <if test="actual_price != null" >
-        actual_price,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="bId != null" >
-        #{bId,jdbcType=VARCHAR},
-      </if>
-      <if test="sale_qty != null" >
-        #{sale_qty,jdbcType=INTEGER},
-      </if>
-      <if test="total_price != null" >
-        #{total_price,jdbcType=INTEGER},
-      </if>
-      <if test="total_profit != null" >
-        #{total_profit,jdbcType=INTEGER},
-      </if>
-      <if test="pId != null" >
-        #{pId,jdbcType=VARCHAR},
-      </if>
-      <if test="pName != null" >
-        #{pName,jdbcType=VARCHAR},
-      </if>
-      <if test="pType != null" >
-        #{pType,jdbcType=VARCHAR},
-      </if>
-      <if test="pBrand != null" >
-        #{pBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="pSupplier != null" >
-        #{pSupplier,jdbcType=VARCHAR},
-      </if>
-      <if test="pYear != null" >
-        #{pYear,jdbcType=VARCHAR},
-      </if>
-      <if test="pFromName != null" >
-        #{pFromName,jdbcType=VARCHAR},
-      </if>
-      <if test="unit_priceCode != null" >
-        #{unit_priceCode,jdbcType=VARCHAR},
-      </if>
-      <if test="actual_price != null" >
-        #{actual_price,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+
+  <sql id="Base_Column_List" >
+    bId, sale_qty, total_price, total_profit, pId, pName, pType, pBrand, pSupplier, pYear, pFromName, unit_priceCode, actual_price
+  </sql>
+
+  <select id="selectByPrimaryKey" resultType="com.model.ViewBillDay" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from view_bill_day
+    where bId = #{bId,jdbcType=VARCHAR}
+  </select>
+
+
 </mapper>

@@ -77,13 +77,5 @@ public class VipController extends SuperController {
         update(response, isUpdate);
     }
 
-    @Override
-    public void toJson(JSONObject obj, Object item) {
-        User user = (User) item;
-        obj.put("tel", user.getuTel());
-        obj.put("name", user.getuName());
-        obj.put("passwd", user.getuPasswd());
-        obj.put("credit", user.getCredit());
-    }
 
 }

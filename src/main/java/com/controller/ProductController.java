@@ -99,18 +99,4 @@ public class ProductController extends SuperController{
 
     }
 
-    @Override
-    public void toJson(JSONObject obj, Object item) {
-        ViewProductCal product = (ViewProductCal) item;
-        obj.put("pId", product.getpId());
-        obj.put("type", product.getpType());
-        obj.put("brand", product.getpBrand());
-        obj.put("supplier",product.getpSupplier());
-        obj.put("year",product.getpYear());
-        obj.put("priceCode",product.getUnit_priceCode());
-        obj.put("actualPrice",product.getActual_price());
-        obj.put("profit",product.getProfit_price());
-        obj.put("saleQty",product.getSale_totalQty());
-        obj.put("restQty",product.getRest_qty());
-    }
 }

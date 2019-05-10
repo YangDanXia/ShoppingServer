@@ -21,8 +21,6 @@ public abstract class SuperController {
     public abstract void add(HttpServletRequest request, HttpServletResponse response) throws IOException;
     //    修改内容
     public abstract void rewrite(HttpServletRequest request, HttpServletResponse response) throws IOException;
-    // 查询的内容转JSON格式
-    public abstract void toJson(JSONObject obj, Object item);
 
 
     //    查询所有信息
@@ -31,9 +29,7 @@ public abstract class SuperController {
         PrintWriter out = response.getWriter();
         JSONArray jsonArr = new JSONArray();
         for(Object item: allInfo){
-            JSONObject obj = new JSONObject();
-            toJson(obj,item);
-            jsonArr.add(obj);
+            jsonArr.add(item);
         }
         out.println(jsonArr);
         out.flush();
@@ -49,7 +45,7 @@ public abstract class SuperController {
             json.put("res", 0);
         }else{
             json.put("res",1);
-            toJson(json,isExist);
+            json.put("data",isExist);
         }
         out.println(json);
         out.flush();

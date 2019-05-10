@@ -3,8 +3,10 @@ package com.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.model.BillInfo;
 import com.model.BillSum;
+import com.model.ViewBillDay;
+import com.model.ViewSale;
 import com.service.BillService;
-import com.service.ProductInBill;
+import com.service.ProductInBillService;
 import com.utils.CtxUtil;
 import io.swagger.annotations.*;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +27,7 @@ import java.util.List;
 @Api(tags = "账单管理接口",description = "账单管理相关操作说明")
 public class BillController extends SuperController {
     public BillService billService = CtxUtil.getBean(BillService .class);
-    public ProductInBill productInBill = CtxUtil.getBean(ProductInBill.class);
+    public ProductInBillService productInBillService = CtxUtil.getBean(ProductInBillService.class);
 
 
     @RequestMapping(value="/addBill", method= RequestMethod.POST)
@@ -66,8 +69,8 @@ public class BillController extends SuperController {
         BillInfo insertInfo = new BillInfo(bId,pId,saleQty,totalPrice,totalProfit);
         insertInfo.setSale_totalQty(saleTotalQty);
         insertInfo.setRest_qty(restQty);
-        BillInfo isExist = productInBill.isExist(bId,pId);
-        insert(response,isExist,insertInfo,productInBill);
+        BillInfo isExist = productInBillService.isExist(bId,pId);
+        insert(response,isExist,insertInfo,productInBillService);
     }
 
 
@@ -80,8 +83,17 @@ public class BillController extends SuperController {
             @ApiImplicitParam(name = "qty",value="商品总数",dataType="Integer",paramType = "query")
     })
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
-    public void addBillSum(){
-
+    public void updateBillSum(HttpServletRequest request,HttpServletResponse response) throws IOException{
+        //   獲取時間
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        String date = df.format(new Date());
+        String bId = request.getParameter("bId");
+        Integer price = Integer.parseInt(request.getParameter("price"));
+        Integer profit = Integer.parseInt(request.getParameter("profit"));
+        Integer qty = Integer.parseInt(request.getParameter("qty"));
+        BillSum updateInfo = new BillSum(bId,qty,price,profit,date);
+        int isUpdate = billService.update(updateInfo);
+        update(response, isUpdate);
     }
 
 
@@ -101,22 +113,30 @@ public class BillController extends SuperController {
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
     @Override
     public void showSelective(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String bId = request.getParameter("bId");
+        List<ViewBillDay> isExist = productInBillService.select(bId);
+        select(response,isExist);
+    }
 
+    @RequestMapping(value="/showTypeSale", method= RequestMethod.GET)
+    @ApiOperation(value = "显示商品销售情况")
+    @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
+    public void showTypeSale(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<ViewSale> typeInfo = productInBillService.selectTypeSale();
+        select(response,typeInfo);
+    }
+
+    @RequestMapping(value="/showBrandSale", method= RequestMethod.GET)
+    @ApiOperation(value = "显示品牌销售情况")
+    @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
+    public void showBrandSale(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<ViewSale> brandInfo = productInBillService.selectBrandSale();
+        select(response,brandInfo);
     }
 
 
     @Override
     public void rewrite(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    }
-
-    @Override
-    public void toJson(JSONObject obj, Object item) {
-        BillSum bill = (BillSum) item;
-        obj.put("bId", bill.getbId());
-        obj.put("price",bill.getBill_price());
-        obj.put("profit",bill.getBill_profit());
-        obj.put("Qty",bill.getProduct_qty());
-        obj.put("time",bill.getCreate_time());
     }
 }

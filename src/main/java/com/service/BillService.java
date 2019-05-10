@@ -1,9 +1,8 @@
 package com.service;
 
-import com.dao.BillInfoMapper;
 import com.dao.BillSumMapper;
-import com.model.BillInfo;
 import com.model.BillSum;
+import com.model.ViewBillDay;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 

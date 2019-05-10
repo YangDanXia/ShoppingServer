@@ -89,19 +89,6 @@ public class MemberController extends SuperController{
         insert(response,isExist,insertInfo,memService);
     }
 
-    @Override
-    public void toJson(JSONObject obj, Object item) {
-        Member mem = (Member) item;
-        obj.put("tel", mem.getmTel());
-        obj.put("name", mem.getmName());
-        obj.put("passwd",mem.getmPasswd());
-        if(mem.getPrivilege()== 0 ){
-            obj.put("privi","管理者");
-        }else{
-            obj.put("privi","股東");
-        }
-    }
-
 
     @Override
     public void showSelective(HttpServletRequest request, HttpServletResponse response) throws IOException {
