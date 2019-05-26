@@ -21,6 +21,8 @@ public abstract class SuperController {
     public abstract void add(HttpServletRequest request, HttpServletResponse response) throws IOException;
     //    修改内容
     public abstract void rewrite(HttpServletRequest request, HttpServletResponse response) throws IOException;
+    //    刪除内容
+    public abstract void delete(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
 
     //    查询所有信息
@@ -83,5 +85,18 @@ public abstract class SuperController {
         out.flush();
     }
 
+    // 删除内容
+    public void delete(HttpServletResponse response,int isDelete) throws IOException{
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+        if(isDelete== 1) {
+            json.put("res", 1);
+        }else{
+            json.put("res",0);
+        }
+        out.println(json);
+        out.flush();
+    }
 
 }

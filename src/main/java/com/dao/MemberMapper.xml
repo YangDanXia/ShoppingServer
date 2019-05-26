@@ -20,6 +20,15 @@
     where mTel = #{mTel,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectByTelAndPasswd" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where mTel = #{0} AND mPasswd = #{1}
+  </select>
+
+
+
     <select id="selectAll" resultType="com.model.Member" parameterType="java.lang.String" >
         select
         <include refid="Base_Column_List" />
@@ -41,7 +50,7 @@
 
   <update id="updatePasswd" parameterType="java.lang.String" >
     update member
-    set mPasswd = #{mPasswd,jdbcType=VARCHAR}
-    where mTel = #{mTel,jdbcType=VARCHAR}
+    set mPasswd = #{1}
+    where mTel = #{0}
   </update>
 </mapper>

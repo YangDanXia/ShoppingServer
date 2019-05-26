@@ -47,8 +47,7 @@ public class MemberController extends SuperController{
             mInfo.put("error","該手機號不存在");
         }else if(passwd.equals(mem.getmPasswd())){
             mInfo.put("res",1);
-            mInfo.put("mName",mem.getmName());
-            mInfo.put("privi",mem.getPrivilege());
+            mInfo.put("data",mem);
         }else{
             mInfo.put("res",0);
             mInfo.put("error","密碼錯誤");
@@ -90,6 +89,42 @@ public class MemberController extends SuperController{
     }
 
 
+    @RequestMapping(value="/alterPasswd", method= RequestMethod.POST)
+    @ApiOperation(value = "管理者/股东修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "tel",value="手机号",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "passwdOld",value="原密码",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "passwdNew",value="新密码",dataType = "String",paramType = "query")
+    })
+    @ApiResponse(response = MemberController.class,code=200,message = "返回对象参数")
+    public void alterPasswd(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String tel = request.getParameter("tel");
+        String passwdOld = request.getParameter("passwdOld");
+        String passwdNew = request.getParameter("passwdNew");
+        Member mem = memService.select(tel,passwdOld);
+        //    返回数据
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        JSONObject mInfo = new JSONObject();
+        if(mem == null){
+            mInfo.put("res",0);
+            mInfo.put("error","手機號或原密碼錯誤");
+        }else{
+            int isChanged = memService.updatePasswd(tel,passwdNew);
+            if(isChanged == 0){
+                mInfo.put("res",0);
+                mInfo.put("error","操作失敗");
+            }else{
+                mInfo.put("res",1);
+                mInfo.put("error","修改成功");
+            }
+
+        }
+        out.println(mInfo);
+        out.flush();
+
+    }
     @Override
     public void showSelective(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -100,6 +135,11 @@ public class MemberController extends SuperController{
 
     @Override
     public void rewrite(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    }
+
+    @Override
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }
 }

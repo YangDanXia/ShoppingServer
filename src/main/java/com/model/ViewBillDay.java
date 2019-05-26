@@ -25,13 +25,13 @@ public class ViewBillDay implements Serializable {
 
     private String pFromName;
 
-    private String unit_priceCode;
+    private Integer unit_price;
 
     private Integer actual_price;
 
     private static final long serialVersionUID = 1L;
 
-    public ViewBillDay(String bId, Integer sale_qty, Integer total_price, Integer total_profit, String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pFromName, String unit_priceCode, Integer actual_price) {
+    public ViewBillDay(String bId, Integer sale_qty, Integer total_price, Integer total_profit, String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pFromName, Integer unit_price, Integer actual_price) {
         this.bId = bId;
         this.sale_qty = sale_qty;
         this.total_price = total_price;
@@ -43,7 +43,7 @@ public class ViewBillDay implements Serializable {
         this.pSupplier = pSupplier;
         this.pYear = pYear;
         this.pFromName = pFromName;
-        this.unit_priceCode = unit_priceCode;
+        this.unit_price = unit_price;
         this.actual_price = actual_price;
     }
 
@@ -139,12 +139,12 @@ public class ViewBillDay implements Serializable {
         this.pFromName = pFromName;
     }
 
-    public String getUnit_priceCode() {
-        return unit_priceCode;
+    public Integer getUnit_price() {
+        return unit_price;
     }
 
-    public void setUnit_priceCode(String unit_priceCode) {
-        this.unit_priceCode = unit_priceCode;
+    public void setUnit_price(Integer unit_price) {
+        this.unit_price = unit_price;
     }
 
     public Integer getActual_price() {

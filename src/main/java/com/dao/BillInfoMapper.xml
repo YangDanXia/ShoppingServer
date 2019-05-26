@@ -66,4 +66,9 @@
       </if>
     </trim>
   </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bill_info
+    where bId = #{bId,jdbcType=VARCHAR}
+  </delete>
 </mapper>

@@ -14,13 +14,13 @@
       <arg column="pSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pYear" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pFromName" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unit_priceCode" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="unit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
 
   <sql id="Base_Column_List" >
-    bId, sale_qty, total_price, total_profit, pId, pName, pType, pBrand, pSupplier, pYear, pFromName, unit_priceCode, actual_price
+    bId, sale_qty, total_price, total_profit, pId, pName, pType, pBrand, pSupplier, pYear, pFromName, unit_price, actual_price
   </sql>
 
   <select id="selectByPrimaryKey" resultType="com.model.ViewBillDay" parameterType="java.lang.String" >

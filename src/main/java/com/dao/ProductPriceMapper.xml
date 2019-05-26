@@ -4,16 +4,13 @@
   <resultMap id="BaseResultMap" type="com.model.ProductPrice" >
     <constructor >
       <idArg column="pId" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="unit_priceCode" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="unit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="recommend_prcie" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="discout" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="profit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    pId, unit_priceCode, unit_price, recommend_prcie, discout, actual_price, profit_price
+    pId, unit_price, actual_price, profit_price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -26,11 +23,9 @@
     where pId = #{pId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.model.ProductPrice" >
-    insert into product_price (pId, unit_priceCode, unit_price, 
-      recommend_prcie, discout, actual_price, 
+    insert into product_price (pId, unit_price, actual_price,
       profit_price)
-    values (#{pId,jdbcType=VARCHAR}, #{unit_priceCode,jdbcType=VARCHAR}, #{unit_price,jdbcType=INTEGER}, 
-      #{recommend_prcie,jdbcType=INTEGER}, #{discout,jdbcType=INTEGER}, #{actual_price,jdbcType=INTEGER}, 
+    values (#{pId,jdbcType=VARCHAR}, #{unit_price,jdbcType=INTEGER}, #{actual_price,jdbcType=INTEGER},
       #{profit_price,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.model.ProductPrice" >
@@ -39,17 +34,8 @@
       <if test="pId != null" >
         pId,
       </if>
-      <if test="unit_priceCode != null" >
-        unit_priceCode,
-      </if>
       <if test="unit_price != null" >
         unit_price,
-      </if>
-      <if test="recommend_prcie != null" >
-        recommend_prcie,
-      </if>
-      <if test="discout != null" >
-        discout,
       </if>
       <if test="actual_price != null" >
         actual_price,
@@ -62,17 +48,8 @@
       <if test="pId != null" >
         #{pId,jdbcType=VARCHAR},
       </if>
-      <if test="unit_priceCode != null" >
-        #{unit_priceCode,jdbcType=VARCHAR},
-      </if>
       <if test="unit_price != null" >
         #{unit_price,jdbcType=INTEGER},
-      </if>
-      <if test="recommend_prcie != null" >
-        #{recommend_prcie,jdbcType=INTEGER},
-      </if>
-      <if test="discout != null" >
-        #{discout,jdbcType=INTEGER},
       </if>
       <if test="actual_price != null" >
         #{actual_price,jdbcType=INTEGER},
@@ -85,17 +62,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.model.ProductPrice" >
     update product_price
     <set >
-      <if test="unit_priceCode != null" >
-        unit_priceCode = #{unit_priceCode,jdbcType=VARCHAR},
-      </if>
       <if test="unit_price != null" >
         unit_price = #{unit_price,jdbcType=INTEGER},
-      </if>
-      <if test="recommend_prcie != null" >
-        recommend_prcie = #{recommend_prcie,jdbcType=INTEGER},
-      </if>
-      <if test="discout != null" >
-        discout = #{discout,jdbcType=INTEGER},
       </if>
       <if test="actual_price != null" >
         actual_price = #{actual_price,jdbcType=INTEGER},
@@ -108,10 +76,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.model.ProductPrice" >
     update product_price
-    set unit_priceCode = #{unit_priceCode,jdbcType=VARCHAR},
-      unit_price = #{unit_price,jdbcType=INTEGER},
-      recommend_prcie = #{recommend_prcie,jdbcType=INTEGER},
-      discout = #{discout,jdbcType=INTEGER},
+    set unit_price = #{unit_price,jdbcType=INTEGER},
       actual_price = #{actual_price,jdbcType=INTEGER},
       profit_price = #{profit_price,jdbcType=INTEGER}
     where pId = #{pId,jdbcType=VARCHAR}

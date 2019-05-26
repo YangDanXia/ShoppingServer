@@ -72,6 +72,8 @@ public class BillInfo implements Serializable {
 
     private Integer rest_qty;
 
+    private Integer isSelling;
+
     public Integer getSale_totalQty() {
         return sale_totalQty;
     }
@@ -87,4 +89,8 @@ public class BillInfo implements Serializable {
     public void setRest_qty(Integer rest_qty) {
         this.rest_qty = rest_qty;
     }
+
+    public Integer getIsSelling() {return isSelling;}
+
+    public void setIsSelling(Integer isSelling) {this.isSelling = isSelling;}
 }

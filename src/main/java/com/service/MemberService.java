@@ -25,11 +25,15 @@ public class MemberService extends SuperService {
         return memMapper.selectByTel(mTel);
     }
 
+    public Member select(String mTel,String mPasswd ){
+        return memMapper.selectByTelAndPasswd(mTel,mPasswd);
+    }
+
     public int delete(String mTel){ return memMapper.deleteByPrimaryKey(mTel); }
 
     //    修改管理者/股东密码
-    public int updatePasswd(String mTel){
-        return memMapper.updatePasswd(mTel);
+    public int updatePasswd(String mTel,String mPasswd){
+        return memMapper.updatePasswd(mTel,mPasswd);
     }
 
 

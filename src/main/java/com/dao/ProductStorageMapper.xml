@@ -6,10 +6,11 @@
       <idArg column="pId" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="sale_totalQty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="rest_qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="isSelling" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    pId, sale_totalQty, rest_qty
+    pId, sale_totalQty, rest_qty,isSelling
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -22,9 +23,10 @@
     where pId = #{pId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.model.ProductStorage" >
-    insert into product_storage (pId, sale_totalQty, rest_qty
+    insert into product_storage (pId, sale_totalQty, rest_qty,isSelling
       )
-    values (#{pId,jdbcType=VARCHAR}, #{sale_totalQty,jdbcType=INTEGER}, #{rest_qty,jdbcType=INTEGER}
+    values (#{pId,jdbcType=VARCHAR}, #{sale_totalQty,jdbcType=INTEGER},
+     #{rest_qty,jdbcType=INTEGER},#{isSelling,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.model.ProductStorage" >
@@ -52,6 +54,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.model.ProductStorage" >
     update product_storage
     <set >
@@ -68,7 +71,8 @@
   <update id="updateByPrimaryKey" parameterType="com.model.ProductStorage" >
     update product_storage
     set sale_totalQty = #{sale_totalQty,jdbcType=INTEGER},
-      rest_qty = #{rest_qty,jdbcType=INTEGER}
+      rest_qty = #{rest_qty,jdbcType=INTEGER},
+      isSelling = #{isSelling,jdbcType=INTEGER}
     where pId = #{pId,jdbcType=VARCHAR}
   </update>
 </mapper>

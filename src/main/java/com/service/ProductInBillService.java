@@ -33,6 +33,7 @@ public class ProductInBillService extends SuperService {
         productStorage.setpId(info.getpId());
         productStorage.setSale_totalQty(info.getSale_totalQty());
         productStorage.setRest_qty(info.getRest_qty());
+        productStorage.setIsSelling(info.getIsSelling());
         return productStorageMapper.updateByPrimaryKey(productStorage);
     }
 

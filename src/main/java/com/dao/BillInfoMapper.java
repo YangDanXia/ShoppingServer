@@ -8,4 +8,6 @@ public interface BillInfoMapper {
     int insertSelective(BillInfo record);
 
     BillInfo selectByPrimaryKey(String bId,String pId);
+
+    int deleteByPrimaryKey(String bId);
 }

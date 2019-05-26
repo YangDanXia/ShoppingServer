@@ -35,16 +35,14 @@ public class ProductService extends SuperService{
         ProductPrice productPrice = new ProductPrice();
         productPrice.setpId(info.getpId());
         productPrice.setActual_price(info.getActual_price());
-        productPrice.setDiscout(0);
         productPrice.setProfit_price(info.getProfit_price());
-        productPrice.setRecommend_prcie(info.getRecommend_prcie());
         productPrice.setUnit_price(info.getUnit_price());
-        productPrice.setUnit_priceCode(info.getUnit_priceCode());
         productPriceMapper.insert(productPrice);
         ProductStorage productStorage = new ProductStorage();
         productStorage.setpId(info.getpId());
         productStorage.setSale_totalQty(0);
         productStorage.setRest_qty(info.getRest_qty());
+        productStorage.setIsSelling(1);
         return productStorageMapper.insert(productStorage);
     }
 
@@ -71,6 +69,14 @@ public class ProductService extends SuperService{
 
     @Override
     public int delete(String id) {
-        return 0;
+        int flag = 0;
+        if(productStorageMapper.deleteByPrimaryKey(id)!=0){
+            if(productPriceMapper.deleteByPrimaryKey(id)!=0){
+                if(productInfoMapper.deleteByPrimaryKey(id)!=0){
+                    flag = 1;
+                }
+            }
+        }
+        return flag;
     }
 }

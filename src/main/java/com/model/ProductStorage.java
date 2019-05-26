@@ -1,5 +1,7 @@
 package com.model;
 
+import io.swagger.models.auth.In;
+
 import java.io.Serializable;
 
 public class ProductStorage implements Serializable {
@@ -9,12 +11,15 @@ public class ProductStorage implements Serializable {
 
     private Integer rest_qty;
 
+    private Integer isSelling;
+
     private static final long serialVersionUID = 1L;
 
-    public ProductStorage(String pId, Integer sale_totalQty, Integer rest_qty) {
+    public ProductStorage(String pId, Integer sale_totalQty, Integer rest_qty,Integer isSelling) {
         this.pId = pId;
         this.sale_totalQty = sale_totalQty;
         this.rest_qty = rest_qty;
+        this.isSelling = isSelling;
     }
 
     public ProductStorage() {
@@ -44,4 +49,8 @@ public class ProductStorage implements Serializable {
     public void setRest_qty(Integer rest_qty) {
         this.rest_qty = rest_qty;
     }
+
+    public Integer getIsSelling() {return isSelling;}
+
+    public void setIsSelling(Integer isSelling) {this.isSelling = isSelling;}
 }

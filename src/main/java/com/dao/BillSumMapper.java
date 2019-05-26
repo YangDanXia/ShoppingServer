@@ -13,6 +13,8 @@ public interface BillSumMapper {
 
     BillSum selectByPrimaryKey(String bId);
 
+    List<BillSum> selectByTime(String create_time);
+
     List<BillSum> selectAll();
 
     int updateByPrimaryKeySelective(BillSum record);

@@ -113,25 +113,12 @@ public class ProductInfo implements Serializable {
 
 
 //    商品价格表
-    private String unit_priceCode;
 
     private Integer unit_price;
-
-    private Integer recommend_prcie;
-
-    private Integer discout;
 
     private Integer actual_price;
 
     private Integer profit_price;
-
-    public String getUnit_priceCode() {
-        return unit_priceCode;
-    }
-
-    public void setUnit_priceCode(String unit_priceCode) {
-        this.unit_priceCode = unit_priceCode;
-    }
 
     public Integer getUnit_price() {
         return unit_price;
@@ -141,21 +128,6 @@ public class ProductInfo implements Serializable {
         this.unit_price = unit_price;
     }
 
-    public Integer getRecommend_prcie() {
-        return recommend_prcie;
-    }
-
-    public void setRecommend_prcie(Integer recommend_prcie) {
-        this.recommend_prcie = recommend_prcie;
-    }
-
-    public Integer getDiscout() {
-        return discout;
-    }
-
-    public void setDiscout(Integer discout) {
-        this.discout = discout;
-    }
 
     public Integer getActual_price() {
         return actual_price;

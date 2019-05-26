@@ -1,5 +1,7 @@
 package com.model;
 
+import io.swagger.models.auth.In;
+
 import java.io.Serializable;
 
 public class ViewProductCal implements Serializable {
@@ -17,7 +19,7 @@ public class ViewProductCal implements Serializable {
 
     private String pYear;
 
-    private String unit_priceCode;
+    private Integer unit_price;
 
     private Integer actual_price;
 
@@ -27,9 +29,11 @@ public class ViewProductCal implements Serializable {
 
     private Integer rest_qty;
 
+    private Integer isSelling;
+
     private static final long serialVersionUID = 1L;
 
-    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, String unit_priceCode, Integer actual_price, Integer profit_price, Integer sale_totalQty, Integer rest_qty) {
+    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, Integer unit_price, Integer actual_price, Integer profit_price, Integer sale_totalQty, Integer rest_qty,Integer isSelling) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
@@ -37,11 +41,12 @@ public class ViewProductCal implements Serializable {
         this.pFrom = pFrom;
         this.pSupplier = pSupplier;
         this.pYear = pYear;
-        this.unit_priceCode = unit_priceCode;
+        this.unit_price = unit_price;
         this.actual_price = actual_price;
         this.profit_price = profit_price;
         this.sale_totalQty = sale_totalQty;
         this.rest_qty = rest_qty;
+        this.isSelling = isSelling;
     }
 
     public ViewProductCal() {
@@ -104,12 +109,12 @@ public class ViewProductCal implements Serializable {
         this.pYear = pYear;
     }
 
-    public String getUnit_priceCode() {
-        return unit_priceCode;
+    public Integer getUnit_price() {
+        return unit_price;
     }
 
-    public void setUnit_priceCode(String unit_priceCode) {
-        this.unit_priceCode = unit_priceCode;
+    public void setUnit_price(Integer unit_price) {
+        this.unit_price = unit_price;
     }
 
     public Integer getActual_price() {
@@ -143,4 +148,8 @@ public class ViewProductCal implements Serializable {
     public void setRest_qty(Integer rest_qty) {
         this.rest_qty = rest_qty;
     }
+
+    public Integer getIsSelling(){return isSelling;}
+
+    public void setIsSelling(Integer isSelling){this.isSelling = isSelling;}
 }

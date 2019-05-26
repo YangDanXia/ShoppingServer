@@ -77,5 +77,10 @@ public class VipController extends SuperController {
         update(response, isUpdate);
     }
 
+    @Override
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    }
+
 
 }
