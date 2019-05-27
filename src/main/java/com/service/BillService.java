@@ -2,13 +2,12 @@ package com.service;
 
 import com.dao.BillInfoMapper;
 import com.dao.BillSumMapper;
-import com.model.BillInfo;
 import com.model.BillSum;
-import com.model.ViewBillDay;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service("BillService")
@@ -28,7 +27,7 @@ public class BillService extends SuperService{
         return billSumMapper.selectByPrimaryKey(bId);
     }
 
-    public List<BillSum> selectByTime(String content){
+    public List<BillSum> selectByTime(Date content){
         return billSumMapper.selectByTime(content);
     }
 

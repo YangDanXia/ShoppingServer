@@ -12,10 +12,12 @@
       <arg column="pImage" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pFrom" jdbcType="BIT" javaType="java.lang.Integer" />
       <arg column="pFromName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="unit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="recommend_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    pId, pName, pType, pBrand, pSupplier, pYear, pImage, pFrom, pFromName
+    pId, pName, pType, pBrand, pSupplier, pYear, pImage, pFrom, pFromName,unit_price, recommend_price
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -31,105 +33,16 @@
   <insert id="insert" parameterType="com.model.ProductInfo" >
     insert into product_info (pId, pName, pType, 
       pBrand, pSupplier, pYear, 
-      pImage, pFrom, pFromName
+      pImage, pFrom, pFromName,unit_price, recommend_price
       )
     values (#{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR}, 
       #{pBrand,jdbcType=VARCHAR}, #{pSupplier,jdbcType=VARCHAR}, #{pYear,jdbcType=VARCHAR}, 
-      #{pImage,jdbcType=VARCHAR}, #{pFrom,jdbcType=BIT}, #{pFromName,jdbcType=VARCHAR}
+      #{pImage,jdbcType=VARCHAR}, #{pFrom,jdbcType=BIT}, #{pFromName,jdbcType=VARCHAR},
+      #{unit_price,jdbcType=INTEGER}, #{recommend_price,jdbcType=INTEGER}
       )
   </insert>
 
-  <insert id="insertSelective" parameterType="com.model.ProductInfo" >
-    insert into product_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="pId != null" >
-        pId,
-      </if>
-      <if test="pName != null" >
-        pName,
-      </if>
-      <if test="pType != null" >
-        pType,
-      </if>
-      <if test="pBrand != null" >
-        pBrand,
-      </if>
-      <if test="pSupplier != null" >
-        pSupplier,
-      </if>
-      <if test="pYear != null" >
-        pYear,
-      </if>
-      <if test="pImage != null" >
-        pImage,
-      </if>
-      <if test="pFrom != null" >
-        pFrom,
-      </if>
-      <if test="pFromName != null" >
-        pFromName,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="pId != null" >
-        #{pId,jdbcType=VARCHAR},
-      </if>
-      <if test="pName != null" >
-        #{pName,jdbcType=VARCHAR},
-      </if>
-      <if test="pType != null" >
-        #{pType,jdbcType=VARCHAR},
-      </if>
-      <if test="pBrand != null" >
-        #{pBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="pSupplier != null" >
-        #{pSupplier,jdbcType=VARCHAR},
-      </if>
-      <if test="pYear != null" >
-        #{pYear,jdbcType=VARCHAR},
-      </if>
-      <if test="pImage != null" >
-        #{pImage,jdbcType=VARCHAR},
-      </if>
-      <if test="pFrom != null" >
-        #{pFrom,jdbcType=BIT},
-      </if>
-      <if test="pFromName != null" >
-        #{pFromName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.model.ProductInfo" >
-    update product_info
-    <set >
-      <if test="pName != null" >
-        pName = #{pName,jdbcType=VARCHAR},
-      </if>
-      <if test="pType != null" >
-        pType = #{pType,jdbcType=VARCHAR},
-      </if>
-      <if test="pBrand != null" >
-        pBrand = #{pBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="pSupplier != null" >
-        pSupplier = #{pSupplier,jdbcType=VARCHAR},
-      </if>
-      <if test="pYear != null" >
-        pYear = #{pYear,jdbcType=VARCHAR},
-      </if>
-      <if test="pImage != null" >
-        pImage = #{pImage,jdbcType=VARCHAR},
-      </if>
-      <if test="pFrom != null" >
-        pFrom = #{pFrom,jdbcType=BIT},
-      </if>
-      <if test="pFromName != null" >
-        pFromName = #{pFromName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where pId = #{pId,jdbcType=VARCHAR}
-  </update>
+
   <update id="updateByPrimaryKey" parameterType="com.model.ProductInfo" >
     update product_info
     set pName = #{pName,jdbcType=VARCHAR},
@@ -139,7 +52,9 @@
       pYear = #{pYear,jdbcType=VARCHAR},
       pImage = #{pImage,jdbcType=VARCHAR},
       pFrom = #{pFrom,jdbcType=BIT},
-      pFromName = #{pFromName,jdbcType=VARCHAR}
+      pFromName = #{pFromName,jdbcType=VARCHAR},
+      unit_price = #{unit_price,jdbcType=INTEGER},
+      recommend_price = #{actual_price,jdbcType=INTEGER}
     where pId = #{pId,jdbcType=VARCHAR}
   </update>
 </mapper>

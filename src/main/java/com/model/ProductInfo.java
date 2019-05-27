@@ -21,9 +21,14 @@ public class ProductInfo implements Serializable {
 
     private String pFromName;
 
+    private Integer unit_price;
+
+    private Integer recommend_price;
+
+
     private static final long serialVersionUID = 1L;
 
-    public ProductInfo(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pImage, Integer pFrom, String pFromName) {
+    public ProductInfo(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pImage, Integer pFrom, String pFromName,Integer unit_price,Integer recommend_price) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
@@ -33,6 +38,8 @@ public class ProductInfo implements Serializable {
         this.pImage = pImage;
         this.pFrom = pFrom;
         this.pFromName = pFromName;
+        this.unit_price = unit_price;
+        this.recommend_price = recommend_price;
     }
 
     public ProductInfo() {
@@ -112,14 +119,6 @@ public class ProductInfo implements Serializable {
     }
 
 
-//    商品价格表
-
-    private Integer unit_price;
-
-    private Integer actual_price;
-
-    private Integer profit_price;
-
     public Integer getUnit_price() {
         return unit_price;
     }
@@ -129,21 +128,16 @@ public class ProductInfo implements Serializable {
     }
 
 
-    public Integer getActual_price() {
-        return actual_price;
+    public Integer getRecommend_price() {
+        return recommend_price;
     }
 
-    public void setActual_price(Integer actual_price) {
-        this.actual_price = actual_price;
+    public void setRecommend_price(Integer recommend_price) {
+        this.recommend_price = recommend_price;
     }
 
-    public Integer getProfit_price() {
-        return profit_price;
-    }
 
-    public void setProfit_price(Integer profit_price) {
-        this.profit_price = profit_price;
-    }
+
 
 
 //    商品库存表

@@ -1,11 +1,9 @@
 package com.service;
 
 import com.dao.ProductInfoMapper;
-import com.dao.ProductPriceMapper;
 import com.dao.ProductStorageMapper;
 import com.dao.ViewProductCalMapper;
 import com.model.ProductInfo;
-import com.model.ProductPrice;
 import com.model.ProductStorage;
 import com.model.ViewProductCal;
 import org.springframework.stereotype.Repository;
@@ -23,8 +21,6 @@ public class ProductService extends SuperService{
     @Resource
     ProductInfoMapper productInfoMapper;
     @Resource
-    ProductPriceMapper productPriceMapper;
-    @Resource
     ProductStorageMapper productStorageMapper;
 
     @Transactional
@@ -32,12 +28,6 @@ public class ProductService extends SuperService{
     public int add(Object record){
         ProductInfo info = (ProductInfo) record;
         productInfoMapper.insert(info);
-        ProductPrice productPrice = new ProductPrice();
-        productPrice.setpId(info.getpId());
-        productPrice.setActual_price(info.getActual_price());
-        productPrice.setProfit_price(info.getProfit_price());
-        productPrice.setUnit_price(info.getUnit_price());
-        productPriceMapper.insert(productPrice);
         ProductStorage productStorage = new ProductStorage();
         productStorage.setpId(info.getpId());
         productStorage.setSale_totalQty(0);
@@ -71,11 +61,9 @@ public class ProductService extends SuperService{
     public int delete(String id) {
         int flag = 0;
         if(productStorageMapper.deleteByPrimaryKey(id)!=0){
-            if(productPriceMapper.deleteByPrimaryKey(id)!=0){
                 if(productInfoMapper.deleteByPrimaryKey(id)!=0){
                     flag = 1;
                 }
-            }
         }
         return flag;
     }

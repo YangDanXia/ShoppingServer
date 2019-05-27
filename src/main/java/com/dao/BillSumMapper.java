@@ -2,6 +2,7 @@ package com.dao;
 
 import com.model.BillSum;
 
+import java.util.Date;
 import java.util.List;
 
 public interface BillSumMapper {
@@ -13,7 +14,7 @@ public interface BillSumMapper {
 
     BillSum selectByPrimaryKey(String bId);
 
-    List<BillSum> selectByTime(String create_time);
+    List<BillSum> selectByTime(Date create_time);
 
     List<BillSum> selectAll();
 

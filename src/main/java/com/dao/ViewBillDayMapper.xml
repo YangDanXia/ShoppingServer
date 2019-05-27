@@ -4,9 +4,6 @@
   <resultMap id="BaseResultMap" type="com.model.ViewBillDay" >
     <constructor >
       <arg column="bId" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="sale_qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="total_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="total_profit" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="pId" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pName" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pType" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -16,6 +13,9 @@
       <arg column="pFromName" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="unit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="sale_qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="total_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="total_profit" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
 

@@ -11,8 +11,7 @@
       <arg column="pSupplier" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="pYear" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="unit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="profit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="recommend_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="sale_totalQty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="rest_qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="isSelling" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -21,7 +20,7 @@
 
   <sql id="Base_Column_List" >
     pId, pName, pType, pBrand, pFrom,pSupplier, pYear, unit_price,
-    actual_price, profit_price, sale_totalQty, rest_qty,isSelling
+    recommend_price,sale_totalQty, rest_qty,isSelling
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >

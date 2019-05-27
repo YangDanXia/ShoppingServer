@@ -13,14 +13,17 @@ public class BillInfo implements Serializable {
 
     private Integer total_profit;
 
+    private Integer actual_price;
+
     private static final long serialVersionUID = 1L;
 
-    public BillInfo(String bId, String pId, Integer sale_qty, Integer total_price, Integer total_profit) {
+    public BillInfo(String bId, String pId, Integer sale_qty, Integer total_price, Integer total_profit,Integer actual_price) {
         this.bId = bId;
         this.pId = pId;
         this.sale_qty = sale_qty;
         this.total_price = total_price;
         this.total_profit = total_profit;
+        this.actual_price = actual_price;
     }
 
     public BillInfo() {
@@ -66,6 +69,10 @@ public class BillInfo implements Serializable {
     public void setTotal_profit(Integer total_profit) {
         this.total_profit = total_profit;
     }
+
+    public Integer getActual_price(){return actual_price;}
+
+    public void setActual_price(Integer actual_price){this.actual_price = actual_price;}
 
 
     private Integer sale_totalQty;

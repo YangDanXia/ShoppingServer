@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,17 +33,24 @@ public class BillController extends SuperController {
 
     @RequestMapping(value="/addBill", method= RequestMethod.POST)
     @ApiOperation(value = "添加賬單")
-    @ApiImplicitParam(name = "bId",value="賬單編號",dataType="String",paramType = "query")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "bId",value="賬單編號",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "bDate",value="账单錄入時間",dataType="String",paramType = "query")
+    })
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
     @Override
     public void add(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //   獲取時間
-        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-        String date = df.format(new Date());
-        String bId = request.getParameter("bId");
-        BillSum insertInfo = new BillSum(bId,0,0,0,date);
-        BillSum isExist = billService.select(bId);
-        insert(response,isExist,insertInfo,billService);
+        try{
+            SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+            Date date = df.parse(request.getParameter("bDate"));
+            String bId = request.getParameter("bId");
+            BillSum insertInfo = new BillSum(bId,0,0,0,date);
+            BillSum isExist = billService.select(bId);
+            insert(response,isExist,insertInfo,billService);
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+        }
     }
 
 
@@ -52,6 +60,7 @@ public class BillController extends SuperController {
             @ApiImplicitParam(name = "bId",value="賬單編號",dataType="String",paramType = "query"),
             @ApiImplicitParam(name = "pId",value="商品編號",dataType="String",paramType = "query"),
             @ApiImplicitParam(name = "saleQty",value="售出数量",dataType="int",paramType = "query"),
+            @ApiImplicitParam(name = "actualPrice",value="实际售价",dataType="int",paramType = "query"),
             @ApiImplicitParam(name = "totalPrice",value="总收入",dataType="int",paramType = "query"),
             @ApiImplicitParam(name = "totalProfit",value="总利润",dataType="int",paramType = "query"),
             @ApiImplicitParam(name = "saleTotalQty",value="售出总数量",dataType="int",paramType = "query"),
@@ -65,10 +74,11 @@ public class BillController extends SuperController {
         Integer saleQty = Integer.parseInt(request.getParameter("saleQty"));
         Integer totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
         Integer totalProfit = Integer.parseInt(request.getParameter("totalProfit"));
+        Integer actualPrice = Integer.parseInt(request.getParameter("actualPrice"));
         Integer saleTotalQty = Integer.parseInt(request.getParameter("saleTotalQty"));
         Integer restQty = Integer.parseInt(request.getParameter("restQty"));
         Integer isSelling = Integer.parseInt(request.getParameter("isSelling"));
-        BillInfo insertInfo = new BillInfo(bId,pId,saleQty,totalPrice,totalProfit);
+        BillInfo insertInfo = new BillInfo(bId,pId,saleQty,totalPrice,totalProfit,actualPrice);
         insertInfo.setSale_totalQty(saleTotalQty);
         insertInfo.setRest_qty(restQty);
         insertInfo.setIsSelling(isSelling);
@@ -86,10 +96,11 @@ public class BillController extends SuperController {
             @ApiImplicitParam(name = "qty",value="商品总数",dataType="int",paramType = "query")
     })
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
-    public void updateBillSum(HttpServletRequest request,HttpServletResponse response) throws IOException{
+    public void updateBillSum(HttpServletRequest request,HttpServletResponse response) throws IOException,ParseException{
         //   獲取時間
-        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-        String date = df.format(new Date());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = df.format(new Date());
+        Date date = df.parse(strDate);
         String bId = request.getParameter("bId");
         Integer price = Integer.parseInt(request.getParameter("price"));
         Integer profit = Integer.parseInt(request.getParameter("profit"));
@@ -125,8 +136,9 @@ public class BillController extends SuperController {
     @ApiOperation(value = "顯示賬單詳情")
     @ApiImplicitParam(name = "content",value="查询日期",dataType="String",paramType = "query")
     @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
-    public void showBillByTime(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String content = request.getParameter("content");
+    public void showBillByTime(HttpServletRequest request, HttpServletResponse response) throws IOException,ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        Date content = df.parse(request.getParameter("content"));
         List<BillSum> isExist = billService.selectByTime(content);
         select(response,isExist);
     }

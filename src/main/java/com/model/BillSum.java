@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class BillSum implements Serializable {
     private String bId;
@@ -11,11 +12,11 @@ public class BillSum implements Serializable {
 
     private Integer bill_profit;
 
-    private String create_time;
+    private Date create_time;
 
     private static final long serialVersionUID = 1L;
 
-    public BillSum(String bId, Integer product_qty, Integer bill_price, Integer bill_profit, String create_time) {
+    public BillSum(String bId, Integer product_qty, Integer bill_price, Integer bill_profit, Date create_time) {
         this.bId = bId;
         this.product_qty = product_qty;
         this.bill_price = bill_price;
@@ -59,11 +60,11 @@ public class BillSum implements Serializable {
         this.bill_profit = bill_profit;
     }
 
-    public String getCreate_time() {
+    public Date getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
 }

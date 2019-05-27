@@ -21,9 +21,7 @@ public class ViewProductCal implements Serializable {
 
     private Integer unit_price;
 
-    private Integer actual_price;
-
-    private Integer profit_price;
+    private Integer recommend_price;
 
     private Integer sale_totalQty;
 
@@ -33,7 +31,7 @@ public class ViewProductCal implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, Integer unit_price, Integer actual_price, Integer profit_price, Integer sale_totalQty, Integer rest_qty,Integer isSelling) {
+    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, Integer unit_price, Integer recommend_price,Integer sale_totalQty, Integer rest_qty,Integer isSelling) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
@@ -42,8 +40,7 @@ public class ViewProductCal implements Serializable {
         this.pSupplier = pSupplier;
         this.pYear = pYear;
         this.unit_price = unit_price;
-        this.actual_price = actual_price;
-        this.profit_price = profit_price;
+        this.recommend_price = recommend_price;
         this.sale_totalQty = sale_totalQty;
         this.rest_qty = rest_qty;
         this.isSelling = isSelling;
@@ -117,20 +114,12 @@ public class ViewProductCal implements Serializable {
         this.unit_price = unit_price;
     }
 
-    public Integer getActual_price() {
-        return actual_price;
+    public Integer getRecommend_price() {
+        return recommend_price;
     }
 
-    public void setActual_price(Integer actual_price) {
-        this.actual_price = actual_price;
-    }
-
-    public Integer getProfit_price() {
-        return profit_price;
-    }
-
-    public void setProfit_price(Integer profit_price) {
-        this.profit_price = profit_price;
+    public void setRecommend_price(Integer recommend_price) {
+        this.recommend_price = recommend_price;
     }
 
     public Integer getSale_totalQty() {

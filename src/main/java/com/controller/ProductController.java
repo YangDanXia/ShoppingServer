@@ -67,8 +67,7 @@ public class ProductController extends SuperController{
             @ApiImplicitParam(name = "image",value="商品图片",dataType="String",paramType = "query"),
             @ApiImplicitParam(name = "from",value="商品货源",dataType="int",paramType = "query"),
             @ApiImplicitParam(name = "unitPrice",value="进价",dataType="int",paramType = "query"),
-            @ApiImplicitParam(name = "actual_price",value="实际售价",dataType="int",paramType = "query"),
-            @ApiImplicitParam(name = "profit_price",value="利润",dataType="int",paramType = "query"),
+            @ApiImplicitParam(name = "recommend_price",value="实际售价",dataType="int",paramType = "query"),
             @ApiImplicitParam(name = "rest_qty",value="库存",dataType="int",paramType = "query")
     })
     @ApiResponse(response = ProductController.class,code=200,message = "返回对象参数")
@@ -84,13 +83,9 @@ public class ProductController extends SuperController{
         Integer from = Integer.parseInt(request.getParameter("from"));
 //        String fromName = request.getParameter("fromName");
         Integer unitPrice = Integer.parseInt(request.getParameter("unitPrice"));
-        Integer actual_price= Integer.parseInt(request.getParameter("actual_price"));
-        Integer profit_price= Integer.parseInt(request.getParameter("profit_price"));
+        Integer recommend_price= Integer.parseInt(request.getParameter("recommend_price"));
         Integer rest_qty= Integer.parseInt(request.getParameter("rest_qty"));
-        ProductInfo insertInfo = new ProductInfo(pId,name,type,brand,supplier,year,image,from,"");
-        insertInfo.setUnit_price(unitPrice);
-        insertInfo.setProfit_price(profit_price);
-        insertInfo.setActual_price(actual_price);
+        ProductInfo insertInfo = new ProductInfo(pId,name,type,brand,supplier,year,image,from,"",unitPrice,recommend_price);
         insertInfo.setRest_qty(rest_qty);
         ProductInfo isExist = productService.isExist(pId);
         insert(response,isExist,insertInfo,productService);

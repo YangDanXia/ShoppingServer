@@ -8,11 +8,12 @@
       <arg column="sale_qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="total_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="total_profit" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="actual_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
 
   <sql id="Base_Column_List" >
-    bId,pId, sale_qty,total_price,total_profit
+    bId,pId, sale_qty,total_price,total_profit,actual_price
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap">
@@ -23,49 +24,11 @@
   </select>
 
   <insert id="insert" parameterType="com.model.BillInfo" >
-    insert into bill_info (bId, pId, sale_qty, 
-      total_price, total_profit)
-    values (#{bId,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{sale_qty,jdbcType=INTEGER}, 
-      #{total_price,jdbcType=INTEGER}, #{total_profit,jdbcType=INTEGER})
+    insert into bill_info (bId, pId, sale_qty, total_price, total_profit, actual_price)
+    values (#{bId,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{sale_qty,jdbcType=INTEGER},
+      #{total_price,jdbcType=INTEGER}, #{total_profit,jdbcType=INTEGER},#{actual_price,jdbcType=INTEGER})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.model.BillInfo" >
-    insert into bill_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="bId != null" >
-        bId,
-      </if>
-      <if test="pId != null" >
-        pId,
-      </if>
-      <if test="sale_qty != null" >
-        sale_qty,
-      </if>
-      <if test="total_price != null" >
-        total_price,
-      </if>
-      <if test="total_profit != null" >
-        total_profit,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="bId != null" >
-        #{bId,jdbcType=VARCHAR},
-      </if>
-      <if test="pId != null" >
-        #{pId,jdbcType=VARCHAR},
-      </if>
-      <if test="sale_qty != null" >
-        #{sale_qty,jdbcType=INTEGER},
-      </if>
-      <if test="total_price != null" >
-        #{total_price,jdbcType=INTEGER},
-      </if>
-      <if test="total_profit != null" >
-        #{total_profit,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from bill_info
