@@ -2,8 +2,10 @@ package com.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.model.BillInfo;
 import com.model.ProductInfo;
 import com.model.ViewProductCal;
+import com.service.ProductInBillService;
 import com.service.ProductService;
 import com.utils.CtxUtil;
 import io.swagger.annotations.*;
@@ -29,6 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @Api(tags = "商品管理接口",description = "商品相关操作说明")
 public class ProductController extends SuperController{
     public ProductService productService = CtxUtil.getBean(ProductService.class);
+    public ProductInBillService productInBillService = CtxUtil.getBean(ProductInBillService.class);
 
     @RequestMapping(value="/showGoodsList", method= RequestMethod.GET)
     @ApiOperation(value = "顯示商品列表")
@@ -97,14 +100,20 @@ public class ProductController extends SuperController{
     }
 
     @RequestMapping(value="/deleteProduct", method= RequestMethod.POST)
-    @ApiOperation(value = "顯示商品信息")
+    @ApiOperation(value = "删除商品信息")
     @ApiImplicitParam(name = "pId",value="商品編號",dataType="String",paramType = "query")
     @ApiResponse(response = ProductController.class,code=200,message = "返回对象参数")
     @Override
     public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String pId = request.getParameter("pId");
-        int isDelete = productService.delete(pId);
-        delete(response,isDelete);
+        List<BillInfo> isExist = productInBillService.isProExist(pId);
+//        账单中商品不存在则可以删除，若存在则报错
+        if(isExist.size() == 0){
+            int isDelete = productService.delete(pId);
+            delete(response,isDelete);
+        }else{
+            delete(response,500);
+        }
     }
 
     // 上传文件存储目录

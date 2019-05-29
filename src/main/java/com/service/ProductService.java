@@ -61,9 +61,9 @@ public class ProductService extends SuperService{
     public int delete(String id) {
         int flag = 0;
         if(productStorageMapper.deleteByPrimaryKey(id)!=0){
-                if(productInfoMapper.deleteByPrimaryKey(id)!=0){
-                    flag = 1;
-                }
+            if(productInfoMapper.deleteByPrimaryKey(id)!=0){
+                flag = 1;
+            }
         }
         return flag;
     }

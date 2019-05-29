@@ -23,6 +23,13 @@
     where bId = #{0} AND pId = #{1}
   </select>
 
+  <select id="selectByPId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bill_info
+    where pId = #{0}
+  </select>
+
   <insert id="insert" parameterType="com.model.BillInfo" >
     insert into bill_info (bId, pId, sale_qty, total_price, total_profit, actual_price)
     values (#{bId,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{sale_qty,jdbcType=INTEGER},

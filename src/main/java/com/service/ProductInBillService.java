@@ -53,9 +53,13 @@ public class ProductInBillService extends SuperService {
         return 0;
     }
 
-    //    商品是否存在
+    //     指定账单的商品是否存在
     public BillInfo isExist(String bId, String pId){
         return billInfoMapper.selectByPrimaryKey(bId,pId);
+    }
+    //     指定商品是否存在
+    public List<BillInfo> isProExist(String pId){
+        return billInfoMapper.selectByPId(pId);
     }
 
 //    查看商品销售情况

@@ -25,6 +25,7 @@
     from product_info
     where pId = #{pId,jdbcType=VARCHAR}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from product_info
     where pId = #{pId,jdbcType=VARCHAR}

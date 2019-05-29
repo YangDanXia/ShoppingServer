@@ -26,6 +26,7 @@
     select
     <include refid="Base_Column_List" />
     from view_bill_sum
+    ORDER BY create_time DESC
   </select>
 
 

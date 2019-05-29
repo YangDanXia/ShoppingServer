@@ -92,6 +92,8 @@ public abstract class SuperController {
         JSONObject json = new JSONObject();
         if(isDelete== 1) {
             json.put("res", 1);
+        }else if(isDelete == 500){
+            json.put("res",500);
         }else{
             json.put("res",0);
         }
