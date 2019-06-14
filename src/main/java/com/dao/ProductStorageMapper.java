@@ -14,4 +14,8 @@ public interface ProductStorageMapper {
     int updateByPrimaryKeySelective(ProductStorage record);
 
     int updateByPrimaryKey(ProductStorage record);
+
+    //    修改销售状态
+    int updateSell(String pId,Integer isSell);
+    int updateQty(String pId,Integer qty);
 }

@@ -4,6 +4,7 @@ import com.dao.BillInfoMapper;
 import com.dao.BillSumMapper;
 import com.dao.ViewBillSumMapper;
 import com.model.BillSum;
+import com.model.MonthBill;
 import com.model.ViewBillSum;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,10 @@ public class BillService extends SuperService{
 
     public List<ViewBillSum> selectByTime(Date content){
         return viewBillSumMapper.selectByTime(content);
+    }
+
+    public List<MonthBill> selectByMonth(Integer content){
+        return viewBillSumMapper.selectByMonth(content);
     }
 
     @Override

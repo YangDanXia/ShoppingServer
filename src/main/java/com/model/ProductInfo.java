@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class ProductInfo implements Serializable {
     private String pId;
@@ -25,10 +26,12 @@ public class ProductInfo implements Serializable {
 
     private Integer recommend_price;
 
+    private Timestamp create_time;
+
 
     private static final long serialVersionUID = 1L;
 
-    public ProductInfo(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pImage, Integer pFrom, String pFromName,Integer unit_price,Integer recommend_price) {
+    public ProductInfo(String pId, String pName, String pType, String pBrand, String pSupplier, String pYear, String pImage, Integer pFrom, String pFromName,Integer unit_price,Integer recommend_price,Timestamp create_time) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
@@ -40,6 +43,7 @@ public class ProductInfo implements Serializable {
         this.pFromName = pFromName;
         this.unit_price = unit_price;
         this.recommend_price = recommend_price;
+        this.create_time = create_time;
     }
 
     public ProductInfo() {
@@ -136,7 +140,9 @@ public class ProductInfo implements Serializable {
         this.recommend_price = recommend_price;
     }
 
+    public Timestamp getCreate_time(){return create_time;}
 
+    public void setCreate_time(Timestamp create_time){this.create_time = create_time;}
 
 
 

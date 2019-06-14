@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.model.BillInfo;
 import com.model.ProductInfo;
 import com.model.ViewProductCal;
+import com.model.ViewProductShow;
 import com.service.ProductInBillService;
 import com.service.ProductService;
 import com.utils.CtxUtil;
@@ -19,9 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import java.io.File;
+import java.util.Random;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -56,6 +62,16 @@ public class ProductController extends SuperController{
         selectSelective(response,isExist);
     }
 
+    @RequestMapping(value="/showProduct", method= RequestMethod.GET)
+    @ApiOperation(value = "商城展示商品信息")
+    @ApiImplicitParam(name = "pType",value="商品类型",dataType="String",paramType = "query")
+    @ApiResponse(response = ProductController.class,code=200,message = "返回对象参数")
+    public void showProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String pType = request.getParameter("pType");
+        List<ViewProductShow> isExist = productService.selectByType(pType);
+        select(response,isExist);
+    }
+
 
 
     @RequestMapping(value="/addProduct", method= RequestMethod.POST)
@@ -87,11 +103,44 @@ public class ProductController extends SuperController{
 //        String fromName = request.getParameter("fromName");
         Integer unitPrice = Integer.parseInt(request.getParameter("unitPrice"));
         Integer recommend_price= Integer.parseInt(request.getParameter("recommend_price"));
+        Date date = new Date();
+        Timestamp create_time = new Timestamp(date.getTime());
+        System.out.print("97:"+create_time);
         Integer rest_qty= Integer.parseInt(request.getParameter("rest_qty"));
-        ProductInfo insertInfo = new ProductInfo(pId,name,type,brand,supplier,year,image,from,"",unitPrice,recommend_price);
+        ProductInfo insertInfo = new ProductInfo(pId,name,type,brand,supplier,year,image,from,"",unitPrice,recommend_price,create_time);
         insertInfo.setRest_qty(rest_qty);
         ProductInfo isExist = productService.isExist(pId);
         insert(response,isExist,insertInfo,productService);
+    }
+
+
+
+    @RequestMapping(value="/updateProductStatue", method= RequestMethod.POST)
+    @ApiOperation(value = "更新商品上架状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pId",value="商品编号",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "isSell",value="销售情况",dataType="int",paramType = "query")
+    })
+    @ApiResponse(response = ProductController.class,code=200,message = "返回对象参数")
+    public void updateProductStatue(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String pId = request.getParameter("pId");
+        Integer isSell = Integer.parseInt(request.getParameter("isSell"));
+        int isUpdate = productService.updateSell(pId,isSell);
+        update(response,isUpdate);
+    }
+
+    @RequestMapping(value="/updateProductQty", method= RequestMethod.POST)
+    @ApiOperation(value = "更新商品库存")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pId",value="商品编号",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "qty",value="销售情况",dataType="int",paramType = "query")
+    })
+    @ApiResponse(response = ProductController.class,code=200,message = "返回对象参数")
+    public void updateProductQty(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String pId = request.getParameter("pId");
+        Integer qty = Integer.parseInt(request.getParameter("qty"));
+        int isUpdate = productService.updateQty(pId,qty);
+        update(response,isUpdate);
     }
 
     @Override
@@ -115,6 +164,25 @@ public class ProductController extends SuperController{
             delete(response,500);
         }
     }
+
+    @RequestMapping(value="/cancelProduct", method= RequestMethod.POST)
+    @ApiOperation(value = "撤销商品供应")
+    @ApiImplicitParam(name = "pId",value="商品編號",dataType="String",paramType = "query")
+    @ApiResponse(response = ProductController.class,code=200,message = "返回对象参数")
+    public void cancelProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String pId = request.getParameter("pId");
+//        下架且库存置为0
+        int updateQty = productService.updateQty(pId,0);
+        if( updateQty > 0) {
+            int isUpdate = productService.updateSell(pId,0);
+            update(response,isUpdate);
+        }else {
+            update(response, updateQty);
+        }
+    }
+
+
+
 
     // 上传文件存储目录
     private static final String UPLOAD_DIRECTORY = "upload";
@@ -181,7 +249,12 @@ public class ProductController extends SuperController{
                 for (FileItem item : formItems) {
                     // 处理不在表单中的字段
                     if (!item.isFormField()) {
-                        String fileName = new File(item.getName()).getName();
+                        Random rand = new Random();
+                        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+                        String time = df.format(new Date());
+                        int randnum = rand.nextInt(900)+100;
+//                        String fileName = new File(item.getName()).getName();
+                        String fileName = String.valueOf(randnum)+time;
                         String filePath = uploadPath + File.separator + fileName;
                         File storeFile = new File(filePath);
                         // 在控制台输出文件的上传路径

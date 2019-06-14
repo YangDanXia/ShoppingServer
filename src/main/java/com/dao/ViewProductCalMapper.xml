@@ -15,12 +15,13 @@
       <arg column="sale_totalQty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="rest_qty" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="isSelling" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
     </constructor>
   </resultMap>
 
   <sql id="Base_Column_List" >
     pId, pName, pType, pBrand, pFrom,pSupplier, pYear, unit_price,
-    recommend_price,sale_totalQty, rest_qty,isSelling
+    recommend_price,sale_totalQty, rest_qty,isSelling,create_time
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -28,6 +29,7 @@
     <include refid="Base_Column_List" />
     from view_product_cal
     where pId = #{pId,jdbcType=VARCHAR}
+    ORDER BY create_time DESC
   </select>
 
 
@@ -35,6 +37,7 @@
     select
     <include refid="Base_Column_List" />
     from view_product_cal
+    ORDER BY create_time DESC
   </select>
 
   <select id="selectAllByFrom" resultType="com.model.ViewProductCal" parameterType="java.lang.Integer" >
@@ -42,6 +45,7 @@
     <include refid="Base_Column_List" />
     from view_product_cal
     where pFrom = #{pFrom,jdbcType=INTEGER}
+    ORDER BY create_time DESC
   </select>
 
 

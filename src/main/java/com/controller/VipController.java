@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -20,6 +21,38 @@ import java.util.List;
 @Api(tags = "會員相關操作接口",description = "會員相關操作说明")
 public class VipController extends SuperController {
     private VipService vipService = CtxUtil.getBean(VipService.class);
+
+
+    @RequestMapping(value="/vipLogin", method= RequestMethod.POST)
+    @ApiOperation(value = "会员登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "tel",value="手机号",dataType="String",paramType = "query"),
+            @ApiImplicitParam(name = "passwd",value="密码",dataType="String",paramType = "query")
+    })
+    @ApiResponse(response = MemberController.class,code=200,message = "返回对象参数")
+    public void vipLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String tel = request.getParameter("tel");
+        String passwd = request.getParameter("passwd");
+        User vip = vipService.select(tel);
+        //    返回数据
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+
+        JSONObject uInfo = new JSONObject();
+        if(vip == null){
+            uInfo.put("res",0);
+            uInfo.put("error","該手機號不存在");
+        }else if(passwd.equals(vip.getuPasswd())){
+            uInfo.put("res",1);
+            uInfo.put("data",vip);
+        }else{
+            uInfo.put("res",0);
+            uInfo.put("error","密碼錯誤");
+        }
+        out.println(uInfo);
+        out.flush();
+    }
+
 
     @RequestMapping(value = "/showVip", method = RequestMethod.GET)
     @ApiOperation(value = "查看所有會員信息")

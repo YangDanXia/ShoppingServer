@@ -76,10 +76,10 @@ public abstract class SuperController {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
-        while(isUpdate== 1) {
+        if(isUpdate== 1) {
             json.put("res", 1);
-            json.put("info","添加成功");
-            isUpdate = 0;
+        }else{
+            json.put("res",0);
         }
         out.println(json);
         out.flush();

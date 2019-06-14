@@ -22,6 +22,16 @@
     where create_time = #{create_time,jdbcType=DATE}
   </select>
 
+  <select id="selectByMonth" resultType="com.model.MonthBill">
+    select
+    year(create_time) as yearNum,
+    month(create_time) as monthNum,
+    sum(profit) as totalProfit
+    from view_bill_sum
+    where year(create_time) = #{0}
+    group by year(create_time),month(create_time)
+  </select>
+
   <select id="selectAll" parameterType="java.lang.String" resultType="com.model.ViewBillSum">
     select
     <include refid="Base_Column_List" />

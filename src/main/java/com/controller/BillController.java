@@ -6,6 +6,7 @@ import com.service.BillService;
 import com.service.ProductInBillService;
 import com.utils.CtxUtil;
 import io.swagger.annotations.*;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -116,6 +118,17 @@ public class BillController extends SuperController {
         List<ViewBillSum> isExist = billService.selectByTime(content);
         select(response,isExist);
     }
+
+    @RequestMapping(value="/showMonthBill", method= RequestMethod.GET)
+    @ApiOperation(value = "顯示每月賬單")
+    @ApiImplicitParam(name = "content",value="查询日期",dataType="Integer",paramType = "query")
+    @ApiResponse(response = BillController.class,code=200,message = "返回对象参数")
+    public void showMonthBill(HttpServletRequest request, HttpServletResponse response) throws IOException,ParseException {
+        Integer content = Integer.parseInt(request.getParameter("content"));
+        List<MonthBill> isExist = billService.selectByMonth(content);
+        select(response,isExist);
+    }
+
 
 
     @RequestMapping(value="/showTypeSale", method= RequestMethod.GET)

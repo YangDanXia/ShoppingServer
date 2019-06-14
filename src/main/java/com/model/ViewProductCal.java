@@ -3,6 +3,7 @@ package com.model;
 import io.swagger.models.auth.In;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class ViewProductCal implements Serializable {
     private String pId;
@@ -29,9 +30,11 @@ public class ViewProductCal implements Serializable {
 
     private Integer isSelling;
 
+    private Timestamp create_time;
+
     private static final long serialVersionUID = 1L;
 
-    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, Integer unit_price, Integer recommend_price,Integer sale_totalQty, Integer rest_qty,Integer isSelling) {
+    public ViewProductCal(String pId, String pName, String pType, String pBrand,Integer pFrom, String pSupplier, String pYear, Integer unit_price, Integer recommend_price,Integer sale_totalQty, Integer rest_qty,Integer isSelling,Timestamp create_time) {
         this.pId = pId;
         this.pName = pName;
         this.pType = pType;
@@ -44,6 +47,7 @@ public class ViewProductCal implements Serializable {
         this.sale_totalQty = sale_totalQty;
         this.rest_qty = rest_qty;
         this.isSelling = isSelling;
+        this.create_time = create_time;
     }
 
     public ViewProductCal() {
@@ -141,4 +145,8 @@ public class ViewProductCal implements Serializable {
     public Integer getIsSelling(){return isSelling;}
 
     public void setIsSelling(Integer isSelling){this.isSelling = isSelling;}
+
+    public Timestamp getCreate_time(){return create_time;}
+
+    public void setCreate_time(Timestamp create_time){this.create_time = create_time;}
 }

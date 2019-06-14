@@ -14,10 +14,11 @@
       <arg column="pFromName" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="unit_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="recommend_price" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    pId, pName, pType, pBrand, pSupplier, pYear, pImage, pFrom, pFromName,unit_price, recommend_price
+    pId, pName, pType, pBrand, pSupplier, pYear, pImage, pFrom, pFromName,unit_price, recommend_price,create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -34,12 +35,12 @@
   <insert id="insert" parameterType="com.model.ProductInfo" >
     insert into product_info (pId, pName, pType, 
       pBrand, pSupplier, pYear, 
-      pImage, pFrom, pFromName,unit_price, recommend_price
+      pImage, pFrom, pFromName,unit_price, recommend_price,create_time
       )
     values (#{pId,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR}, 
       #{pBrand,jdbcType=VARCHAR}, #{pSupplier,jdbcType=VARCHAR}, #{pYear,jdbcType=VARCHAR}, 
       #{pImage,jdbcType=VARCHAR}, #{pFrom,jdbcType=BIT}, #{pFromName,jdbcType=VARCHAR},
-      #{unit_price,jdbcType=INTEGER}, #{recommend_price,jdbcType=INTEGER}
+      #{unit_price,jdbcType=INTEGER}, #{recommend_price,jdbcType=INTEGER},#{create_time,jdbcType=TIMESTAMP}
       )
   </insert>
 
@@ -55,7 +56,8 @@
       pFrom = #{pFrom,jdbcType=BIT},
       pFromName = #{pFromName,jdbcType=VARCHAR},
       unit_price = #{unit_price,jdbcType=INTEGER},
-      recommend_price = #{actual_price,jdbcType=INTEGER}
+      recommend_price = #{actual_price,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
     where pId = #{pId,jdbcType=VARCHAR}
   </update>
 </mapper>

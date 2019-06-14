@@ -75,4 +75,16 @@
       isSelling = #{isSelling,jdbcType=INTEGER}
     where pId = #{pId,jdbcType=VARCHAR}
   </update>
+
+  <update id="updateSell" >
+    update product_storage
+    set isSelling = #{1}
+    where pId = #{0}
+  </update>
+
+  <update id="updateQty" >
+    update product_storage
+    set rest_qty = #{1}
+    where pId = #{0}
+  </update>
 </mapper>

@@ -3,9 +3,11 @@ package com.service;
 import com.dao.ProductInfoMapper;
 import com.dao.ProductStorageMapper;
 import com.dao.ViewProductCalMapper;
+import com.dao.ViewProductShowMapper;
 import com.model.ProductInfo;
 import com.model.ProductStorage;
 import com.model.ViewProductCal;
+import com.model.ViewProductShow;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,8 @@ public class ProductService extends SuperService{
     ProductInfoMapper productInfoMapper;
     @Resource
     ProductStorageMapper productStorageMapper;
+    @Resource
+    ViewProductShowMapper viewProductShowMapper;
 
     @Transactional
     @Override
@@ -45,6 +49,8 @@ public class ProductService extends SuperService{
         return vProductCalMapper.selectAllByFrom(from);
     }
 
+
+
 //    商品是否存在
     public ProductInfo isExist(String id){
         return productInfoMapper.selectByPrimaryKey(id);
@@ -55,6 +61,15 @@ public class ProductService extends SuperService{
         return vProductCalMapper.selectByPrimaryKey(id);
     }
 
+    public List<ViewProductShow> selectByType(String type){ return viewProductShowMapper.selectByType(type);}
+
+//    更新商品状态
+    public int updateSell(String id,int isSell){
+        return productStorageMapper.updateSell(id,isSell);
+    }
+    public int updateQty(String id,int qty){
+        return productStorageMapper.updateQty(id,qty);
+    }
 
 
     @Override
@@ -67,4 +82,5 @@ public class ProductService extends SuperService{
         }
         return flag;
     }
+
 }
